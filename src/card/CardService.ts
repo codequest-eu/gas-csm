@@ -33,6 +33,7 @@ import { SelectionInputType } from "./enums/SelectionInputType";
 import { TextButtonStyle } from "./enums/TextButtonStyle";
 import { ContentType } from "./enums/ContentType";
 import { UpdateDraftBodyType } from "./enums/UpdateDraftBodyType";
+import { FixedFooter } from "./classes/FixedFooter";
 
 export class CardService {
   static newAction() {
@@ -129,6 +130,10 @@ export class CardService {
 
   static newUniversalActionResponseBuilder() {
     return new UniversalActionResponseBuilder();
+  }
+
+  static newFixedFooter() {
+    return new FixedFooter();
   }
 
   static get ComposeEmailType() {

@@ -33,6 +33,7 @@ import { SelectionInputType } from "./enums/SelectionInputType";
 import { TextButtonStyle } from "./enums/TextButtonStyle";
 import { ContentType } from "./enums/ContentType";
 import { UpdateDraftBodyType } from "./enums/UpdateDraftBodyType";
+import { FixedFooter } from "./classes/FixedFooter";
 export declare class CardService {
     static newAction(): Action;
     static newActionResponseBuilder(): ActionResponseBuilder;
@@ -58,6 +59,7 @@ export declare class CardService {
     static newTextInput(): TextInput;
     static newTextParagraph(): TextParagraph;
     static newUniversalActionResponseBuilder(): UniversalActionResponseBuilder;
+    static newFixedFooter(): FixedFooter;
     static get ComposeEmailType(): typeof ComposeEmailType;
     static get Icon(): typeof Icon;
     static get ImageStyle(): typeof ImageStyle;
