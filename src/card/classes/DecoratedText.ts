@@ -1,4 +1,6 @@
-import { BaseClass, BaseClassData } from "../../base/BaseClass";
+import { BaseClassData } from "../../base/BaseClass";
+import { ActionComputedProps } from "./Action";
+import { Widget } from "./Widget";
 
 export interface DecoratedTextComputedProps extends BaseClassData {
   iconUrl?: string;
@@ -6,7 +8,7 @@ export interface DecoratedTextComputedProps extends BaseClassData {
   text: string;
   topLabel?: string;
   bottomLabel?: string;
-  //   onClickAction?: Spec.MockedAction;
+  onClickAction?: ActionComputedProps;
 }
 
-export class DecoratedText extends BaseClass<DecoratedTextComputedProps> {}
+export class DecoratedText extends Widget<DecoratedTextComputedProps> {}

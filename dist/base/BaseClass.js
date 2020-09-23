@@ -4,9 +4,9 @@ exports.BaseClass = void 0;
 class BaseClass {
     constructor(data) {
         this.type = this.constructor.name;
-        this.type = this.constructor.name;
-        const type = this.constructor.prototype;
+        const type = this.constructor.name;
         this._data = data || {};
+        this.type = type;
         const proxy = new Proxy(this, {
             get: (instance, key) => {
                 if (key === "type") {

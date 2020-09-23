@@ -1,34 +1,50 @@
 import { BaseClass, BaseClassData } from "../base/BaseClass";
-import * as Card from "../card";
+import {
+  CardSectionComputedProps,
+  WidgetComputedProps,
+  CardSection,
+} from "../card/classes/CardSection";
+import { Card, CardComputedProps } from "../card/classes/Card";
 
-export function buildComponent<C extends BaseClassData>(
-  component: BaseClass<C>
-) {
-  const specData = component.getData();
+type CardOrSectionComputedProps = {
+  widgets?: WidgetComputedProps[];
+  sections?: CardSectionComputedProps[];
+};
 
-  const type = component.type;
+export function buildComponent<C extends Card | CardSection>(component: C) {
+  const mockData = component.getData();
 
   return {
-    findByText: findByText<C>(specData),
-    findByType: findByType<C>(specData),
-    specData,
+    findByText: findByText(mockData),
+    findByType: findByType(mockData),
+    sections: ((mockData as CardComputedProps).sections || []).map(s => ({
+      ...s,
+      findByType: findByType(s),
+    })),
+    widgets: (mockData as CardSectionComputedProps).widgets,
+    card: mockData.type === "Card" ? mockData : undefined,
+    mockData,
   };
 }
 
-function findByType<C extends BaseClassData>(
-  data: C,
+export function findByType<C extends BaseClassData>(
+  data: CardOrSectionComputedProps,
   found: BaseClassData[] = []
 ) {
   return function <Target extends { new (): BaseClass }>(
     ComponentClass: Target
   ): Target extends { new (): BaseClass<infer P> } ? P[] : never[] {
+    // @ts-ignore
     return [...(data.widgets || []), ...(data.sections || [])].reduce(
       (prev, curr) => {
         const result =
           curr.type === new ComponentClass().type ? [...prev, curr] : prev;
 
-        return curr.widgets
-          ? findByType<C>(curr, result)(ComponentClass)
+        return (curr as CardSectionComputedProps).widgets
+          ? findByType<C>(
+              curr as CardSectionComputedProps,
+              result
+            )(ComponentClass)
           : result;
       },
       found
@@ -36,29 +52,30 @@ function findByType<C extends BaseClassData>(
   };
 }
 
-function findByText<C extends BaseClassData>(
-  comp: C,
+export function findByText(
+  comp: CardOrSectionComputedProps,
   found: BaseClassData[] = []
 ) {
-  return function (
+  return function <T extends BaseClassData>(
     text: string,
     predicate: (value: string, text: string) => boolean = (v, t) => v === t
-  ): BaseClassData[] {
+  ): T[] {
     return [...(comp.widgets || []), ...(comp.sections || [])].reduce(
       (prev, curr) => {
         const textsFound = Object.entries(curr).filter(
           ([, value]) => typeof value === "string" && predicate(value, text)
         );
 
-        const result = textsFound.length
-          ? [...prev, { ...curr, textsFound }]
-          : prev;
+        const result = textsFound.length ? [...prev, curr] : prev;
 
-        return curr.widgets
-          ? findByText(curr, result)(text, predicate)
+        return (curr as CardSectionComputedProps).widgets
+          ? findByText(curr as CardSectionComputedProps, result)(
+              text,
+              predicate
+            )
           : result;
       },
       found
-    );
+    ) as T[];
   };
 }

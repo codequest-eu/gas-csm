@@ -1,6 +1,5 @@
 export interface BaseClassData {
-    widgets?: any[];
-    sections?: any[];
+    type: string;
 }
 export declare class BaseClass<T extends BaseClassData = BaseClassData> {
     _data: T;

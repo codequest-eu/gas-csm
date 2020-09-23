@@ -1,6 +1,5 @@
 export interface BaseClassData {
-  widgets?: any[];
-  sections?: any[];
+  type: string;
 }
 
 export class BaseClass<T extends BaseClassData = BaseClassData> {
@@ -9,9 +8,10 @@ export class BaseClass<T extends BaseClassData = BaseClassData> {
   public type = this.constructor.name;
 
   constructor(data?: T) {
-    this.type = this.constructor.name;
-    const type = this.constructor.prototype;
+    const type = this.constructor.name;
     this._data = data || ({} as T);
+
+    this.type = type;
 
     const proxy = new Proxy(this, {
       get: (instance: any, key: string) => {

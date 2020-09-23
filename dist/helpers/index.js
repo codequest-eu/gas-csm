@@ -1,7 +1,14 @@
 "use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __exportStar = (this && this.__exportStar) || function(m, exports) {
+    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.noop = exports.buildComponent = void 0;
-const buildComponent_1 = require("./buildComponent");
-Object.defineProperty(exports, "buildComponent", { enumerable: true, get: function () { return buildComponent_1.buildComponent; } });
-const noop_1 = require("./noop");
-Object.defineProperty(exports, "noop", { enumerable: true, get: function () { return noop_1.noop; } });
+__exportStar(require("./buildComponent"), exports);
+__exportStar(require("./noop"), exports);
