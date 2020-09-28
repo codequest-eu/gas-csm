@@ -37,6 +37,8 @@ const TextButtonStyle_1 = require("./enums/TextButtonStyle");
 const ContentType_1 = require("./enums/ContentType");
 const UpdateDraftBodyType_1 = require("./enums/UpdateDraftBodyType");
 const FixedFooter_1 = require("./classes/FixedFooter");
+const DatePicker_1 = require("./classes/DatePicker");
+const DateTimePicker_1 = require("./classes/DateTimePicker");
 class CardService {
     static newAction() {
         return new Action_1.Action();
@@ -109,6 +111,12 @@ class CardService {
     }
     static newUniversalActionResponseBuilder() {
         return new UniversalActionResponseBuilder_1.UniversalActionResponseBuilder();
+    }
+    static newDatePicker() {
+        return new DatePicker_1.DatePicker();
+    }
+    static newDateTimePicker() {
+        return new DateTimePicker_1.DateTimePicker();
     }
     static newFixedFooter() {
         return new FixedFooter_1.FixedFooter();

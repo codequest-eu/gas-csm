@@ -34,6 +34,8 @@ import { TextButtonStyle } from "./enums/TextButtonStyle";
 import { ContentType } from "./enums/ContentType";
 import { UpdateDraftBodyType } from "./enums/UpdateDraftBodyType";
 import { FixedFooter } from "./classes/FixedFooter";
+import { DatePicker } from "./classes/DatePicker";
+import { DateTimePicker } from "./classes/DateTimePicker";
 
 export class CardService {
   static newAction() {
@@ -130,6 +132,14 @@ export class CardService {
 
   static newUniversalActionResponseBuilder() {
     return new UniversalActionResponseBuilder();
+  }
+
+  static newDatePicker() {
+    return new DatePicker();
+  }
+
+  static newDateTimePicker() {
+    return new DateTimePicker();
   }
 
   static newFixedFooter() {
