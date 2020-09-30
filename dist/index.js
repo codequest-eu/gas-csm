@@ -19,9 +19,9 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Spec = exports.Card = exports.BaseClass = void 0;
-const Card = __importStar(require("./card"));
-exports.Card = Card;
+exports.Spec = exports.Mocks = exports.BaseClass = void 0;
+const Mocks = __importStar(require("./mocks"));
+exports.Mocks = Mocks;
 const BaseClass_1 = require("./base/BaseClass");
 Object.defineProperty(exports, "BaseClass", { enumerable: true, get: function () { return BaseClass_1.BaseClass; } });
 const Spec = __importStar(require("./helpers"));

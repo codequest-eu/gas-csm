@@ -1,4 +1,4 @@
-import * as Card from "./card";
+import * as Mocks from "./mocks";
 import { BaseClass } from "./base/BaseClass";
 import * as Spec from "./helpers";
-export { BaseClass, Card, Spec };
+export { BaseClass, Mocks, Spec };

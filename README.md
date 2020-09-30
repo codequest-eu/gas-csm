@@ -109,28 +109,28 @@ describe("createHomepageWelcomeSection", () => {
 ## Queries
 Once you've built a card or section mock, the returned object provices helpers for finding elements within the mocked object.
 
-### `findByText(comp: Card | Section)(text: string, predicate?: (value: string, text: string) => boolean)`
+### `findByText(comp: Card | CardSection)(text: string, predicate?: (value: string, text: string) => boolean)`
 Returns array of mocks in which at least one property's value was of type `string` and matched the passed `predicate`. Default `predicate` looks for exact matches. Customise this to your needs, if for example you are looking for props that include the text or were transformed in some way.
 
 Cast the objects found in the returned array to their respective mocked props types to be able to check their properties:
 ```ts
 const [submitButton] = result.findByText("Submit", (v, t) => v.includes(t));
 
-(submitButton as TextButton).onClickAction!.functionName.should.equal("someFn");
+(submitButton as Mocks.TextButton).onClickAction!.functionName.should.equal("someFn");
 ```
 
 This way you start asserting on TS level in your tests.
 
-### `findByType(comp: Card | Section)(ComponentClass: { new (): BaseClass })`
+### `findByType(comp: Card | CardSection)(ComponentClass: { new (): BaseClass })`
 Returns array of mocks of certain type found within the passed mocked `Card` or `CardSection`. The `ComponentClass` should be one of the mock classes exported by this library, for example `DecoratedText`. Resulting array is strongly typed:
 
 ```ts
-const [submitButton] = formSection.findByType(GasMocks.Card.TextButton);
+const [submitButton] = formSection.findByType(Mocks.TextButton);
 
 
-// submitButton is of type TextButton
+// submitButton inferred type TextButton
 submitButton.text.should.equal("Create");
 submitButton.onClickAction!.functionName.should.equal(
-    "Events.onCreateDocumentSubmit"
+    "someFn"
 );
 ```
