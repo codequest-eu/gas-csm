@@ -1,6 +1,11 @@
 import { CardSection } from "../mocks/classes/CardSection";
 import { findByTextInCard, findByTextInSection, findByType } from "./queries";
-import { Card } from "../mocks";
+import {
+  Card,
+  ActionResponseBuilder,
+  ActionResponse,
+  Navigation,
+} from "../mocks";
 import { BaseClassData } from "../base/BaseClass";
 
 export function buildSection(
@@ -29,8 +34,11 @@ export function buildCard(
   }
 
   const mockData = card.getData();
+  return buildCardResult(mockData);
+}
 
-  const { sections } = mockData;
+function buildCardResult(mockData: Card) {
+  const { sections, fixedFooter, header, name, cardActions } = mockData;
 
   if (sections && sections.length === 0) {
     throw new Error("Every card has to contain at least one section.");
@@ -39,12 +47,43 @@ export function buildCard(
   return {
     findByText: findByTextInCard(mockData),
     findByType: findByType(mockData),
-    sections: (mockData.sections || []).map(buildSectionResult),
-    fixedFooter: mockData.fixedFooter,
-    header: mockData.header,
-    name: mockData.name,
-    cardActions: mockData.cardActions,
+    sections: (sections || []).map(buildSectionResult),
+    fixedFooter,
+    header,
+    name,
+    cardActions,
     debug: debug(mockData),
+  };
+}
+
+export function buildActionResponse(
+  actionResponse: GoogleAppsScript.Card_Service.ActionResponse & {
+    getData?: () => ActionResponse;
+  }
+) {
+  if (!actionResponse.getData) {
+    throw new Error(
+      "ActionResponse not mocked properly: no getData function found."
+    );
+  }
+
+  const mockData = actionResponse.getData();
+
+  const currentCard =
+    mockData.navigation && mockData.navigation.cards.reverse()[0].card;
+
+  return {
+    debug: debug(mockData),
+    ...mockData,
+    card: currentCard ? buildCardResult(currentCard) : null,
+    notified: Boolean(mockData.notification),
+    navigation: mockData.navigation && {
+      ...mockData.navigation,
+      cards: mockData.navigation.cards.map(({ nav, card }) => ({
+        nav,
+        card: card ? buildCardResult(card) : card,
+      })),
+    },
   };
 }
 

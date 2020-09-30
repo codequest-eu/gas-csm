@@ -106,6 +106,9 @@ describe("createHomepageWelcomeSection", () => {
 })
 ```
 
+### `buildActionResponse(actionResponse: GoogleAppsScript.Card_Service.ActionResponse)`
+Returns mocked ActionResponse. Contains navigation with cards built using `buildCard` and last built card hoisted and built the same way.
+
 ## Queries
 Once you've built a card or section mock, the returned object provices helpers for finding elements within the mocked object. You can find these in results of `buildCard` and `buildSection` or import them manually from the `Spec` object. You will find them under `findByTextInCard`, `findByTextInSection`, `findByType` and `isTextInWidget`.
 

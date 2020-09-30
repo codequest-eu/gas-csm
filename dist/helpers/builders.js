@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.buildCard = exports.buildSection = void 0;
+exports.buildActionResponse = exports.buildCard = exports.buildSection = void 0;
 const queries_1 = require("./queries");
 function buildSection(section) {
     if (!section.getData) {
@@ -15,22 +15,46 @@ function buildCard(card) {
         throw new Error("Card not mocked properly: no getData function found.");
     }
     const mockData = card.getData();
-    const { sections } = mockData;
+    return buildCardResult(mockData);
+}
+exports.buildCard = buildCard;
+function buildCardResult(mockData) {
+    const { sections, fixedFooter, header, name, cardActions } = mockData;
     if (sections && sections.length === 0) {
         throw new Error("Every card has to contain at least one section.");
     }
     return {
         findByText: queries_1.findByTextInCard(mockData),
         findByType: queries_1.findByType(mockData),
-        sections: (mockData.sections || []).map(buildSectionResult),
-        fixedFooter: mockData.fixedFooter,
-        header: mockData.header,
-        name: mockData.name,
-        cardActions: mockData.cardActions,
+        sections: (sections || []).map(buildSectionResult),
+        fixedFooter,
+        header,
+        name,
+        cardActions,
         debug: debug(mockData),
     };
 }
-exports.buildCard = buildCard;
+function buildActionResponse(actionResponse) {
+    if (!actionResponse.getData) {
+        throw new Error("ActionResponse not mocked properly: no getData function found.");
+    }
+    const mockData = actionResponse.getData();
+    const currentCard = mockData.navigation && mockData.navigation.cards.reverse()[0].card;
+    return {
+        debug: debug(mockData),
+        ...mockData,
+        card: currentCard ? buildCardResult(currentCard) : null,
+        notified: Boolean(mockData.notification),
+        navigation: mockData.navigation && {
+            ...mockData.navigation,
+            cards: mockData.navigation.cards.map(({ nav, card }) => ({
+                nav,
+                card: card ? buildCardResult(card) : card,
+            })),
+        },
+    };
+}
+exports.buildActionResponse = buildActionResponse;
 function buildSectionResult(mockData) {
     const { widgets } = mockData;
     if (!widgets || widgets.length === 0) {

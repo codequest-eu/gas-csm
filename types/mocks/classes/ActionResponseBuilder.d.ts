@@ -1,14 +1,5 @@
-import { BaseClass, BaseClassData } from "../../base/BaseClass";
-import { OpenLink } from "./OpenLink";
-import { Navigation } from "./Navigation";
-import { Notification } from "./Notification";
+import { BaseClass } from "../../base/BaseClass";
 import { ActionResponse } from "./ActionResponse";
-export interface ActionResponseBuilder extends BaseClassData {
-    navigation?: Navigation;
-    notification?: Notification;
-    openLink?: OpenLink;
-    stateChanged?: boolean;
-}
-export declare class ActionResponseBuilder extends BaseClass {
+export declare class ActionResponseBuilder extends BaseClass<ActionResponseBuilder> {
     build(): ActionResponse;
 }

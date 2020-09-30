@@ -40,6 +40,6 @@ export class Card extends BaseClass<Card> {
   }
 
   printJson() {
-    return this.getData();
+    return JSON.stringify(this.getData());
   }
 }

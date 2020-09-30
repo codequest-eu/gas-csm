@@ -24,7 +24,7 @@ class Card extends BaseClass_1.BaseClass {
         this._data.cardActions = [];
     }
     printJson() {
-        return this.getData();
+        return JSON.stringify(this.getData());
     }
 }
 exports.Card = Card;

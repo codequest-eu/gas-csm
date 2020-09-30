@@ -14,22 +14,22 @@ export class Navigation extends BaseClass<Navigation> {
     this._data.cards = [];
   }
 
-  pushCard(card: Card) {
+  private pushCard(card: Card) {
     this._data.cards.push({ nav: "push", card: card.getData() });
     return this;
   }
 
-  updateCard(card: Card) {
+  private updateCard(card: Card) {
     this._data.cards.push({ nav: "update", card: card.getData() });
     return this;
   }
 
-  popCard() {
+  private popCard() {
     this._data.cards.push({ nav: "pop", card: null });
     return this;
   }
 
-  popToRoot() {
+  private popToRoot() {
     this._data.cards.push({ nav: "popToRoot", card: null });
     return this;
   }

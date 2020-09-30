@@ -4,14 +4,7 @@ import { Navigation } from "./Navigation";
 import { Notification } from "./Notification";
 import { ActionResponse } from "./ActionResponse";
 
-export interface ActionResponseBuilder extends BaseClassData {
-  navigation?: Navigation;
-  notification?: Notification;
-  openLink?: OpenLink;
-  stateChanged?: boolean;
-}
-
-export class ActionResponseBuilder extends BaseClass {
+export class ActionResponseBuilder extends BaseClass<ActionResponseBuilder> {
   build() {
     return new ActionResponse(this.getData());
   }

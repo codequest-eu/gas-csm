@@ -17,7 +17,5 @@ export declare class Card extends BaseClass<Card> {
     addCardAction(action: CardAction): void;
     setFixedFooter(fixedFooter: FixedFooter): void;
     constructor();
-    printJson(): Card & {
-        type: string;
-    };
+    printJson(): string;
 }

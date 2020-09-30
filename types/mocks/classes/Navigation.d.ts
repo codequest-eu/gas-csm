@@ -8,8 +8,8 @@ export interface Navigation extends BaseClassData {
 }
 export declare class Navigation extends BaseClass<Navigation> {
     constructor();
-    pushCard(card: Card): this;
-    updateCard(card: Card): this;
-    popCard(): this;
-    popToRoot(): this;
+    private pushCard;
+    private updateCard;
+    private popCard;
+    private popToRoot;
 }
