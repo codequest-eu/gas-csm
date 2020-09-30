@@ -1,32 +1,25 @@
 import { BaseClassData, BaseClass } from "../base/BaseClass";
-import { CardSectionComputedProps, WidgetComputedProps } from "../card";
-
-type CardOrSectionComputedProps = {
-  widgets?: WidgetComputedProps[];
-  sections?: CardSectionComputedProps[];
-};
+import { CardSection, Widget, Card } from "../card";
 
 export function findByText(
-  comp: CardOrSectionComputedProps,
+  comp: Card | CardSection,
   found: BaseClassData[] = []
 ) {
   return function <T extends BaseClassData>(
     text: string,
     predicate: (value: string, text: string) => boolean = (v, t) => v === t
   ): T[] {
+    // @ts-ignore
     return [...(comp.widgets || []), ...(comp.sections || [])].reduce(
       (prev, curr) => {
-        const textsFound = Object.entries(curr).filter(
+        const textFound = Object.entries(curr).some(
           ([, value]) => typeof value === "string" && predicate(value, text)
         );
 
-        const result = textsFound.length ? [...prev, curr] : prev;
+        const result = textFound ? [...prev, curr] : prev;
 
-        return (curr as CardSectionComputedProps).widgets
-          ? findByText(curr as CardSectionComputedProps, result)(
-              text,
-              predicate
-            )
+        return (curr as CardSection).widgets
+          ? findByText(curr as CardSection, result)(text, predicate)
           : result;
       },
       found
@@ -35,7 +28,7 @@ export function findByText(
 }
 
 export function findByType<C extends BaseClassData>(
-  data: CardOrSectionComputedProps,
+  data: Card | CardSection,
   found: BaseClassData[] = []
 ) {
   return function <Target extends { new (): BaseClass }>(
@@ -47,11 +40,8 @@ export function findByType<C extends BaseClassData>(
         const result =
           curr.type === new ComponentClass().type ? [...prev, curr] : prev;
 
-        return (curr as CardSectionComputedProps).widgets
-          ? findByType<C>(
-              curr as CardSectionComputedProps,
-              result
-            )(ComponentClass)
+        return (curr as CardSection).widgets
+          ? findByType<C>(curr as CardSection, result)(ComponentClass)
           : result;
       },
       found

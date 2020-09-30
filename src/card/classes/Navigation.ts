@@ -1,14 +1,14 @@
 import { BaseClass, BaseClassData } from "../../base/BaseClass";
-import { Card, CardComputedProps } from "./Card";
+import { Card } from "./Card";
 
-export interface NavigationComputedProps extends BaseClassData {
+export interface Navigation extends BaseClassData {
   cards: {
     nav: "push" | "update" | "pop" | "popToRoot";
-    card: CardComputedProps | null;
+    card: Card | null;
   }[];
 }
 
-export class Navigation extends BaseClass<NavigationComputedProps> {
+export class Navigation extends BaseClass<Navigation> {
   constructor() {
     super();
     this._data.cards = [];

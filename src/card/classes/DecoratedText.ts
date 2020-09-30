@@ -1,14 +1,14 @@
 import { BaseClassData } from "../../base/BaseClass";
-import { ActionComputedProps } from "./Action";
+import { Action } from "./Action";
 import { Widget } from "./Widget";
 
-export interface DecoratedTextComputedProps extends BaseClassData {
+export interface DecoratedText extends BaseClassData {
   iconUrl?: string;
   icon?: GoogleAppsScript.Card_Service.Icon;
   text: string;
   topLabel?: string;
   bottomLabel?: string;
-  onClickAction?: ActionComputedProps;
+  onClickAction?: Action;
 }
 
-export class DecoratedText extends Widget<DecoratedTextComputedProps> {}
+export class DecoratedText extends Widget<DecoratedText> {}

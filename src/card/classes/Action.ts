@@ -1,8 +1,8 @@
 import { BaseClass, BaseClassData } from "../../base/BaseClass";
 
-export interface ActionComputedProps extends BaseClassData {
+export interface Action extends BaseClassData {
   functionName: string;
   parameters: any;
 }
 
-export class Action extends BaseClass<ActionComputedProps> {}
+export class Action extends BaseClass<Action> {}

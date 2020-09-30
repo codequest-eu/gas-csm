@@ -1,5 +1,5 @@
 import { BaseClassData } from "../../base/BaseClass";
-import { ActionComputedProps } from "./Action";
+import { Action } from "./Action";
 import { Widget } from "./Widget";
 
 export type SelectionInputItem = {
@@ -8,14 +8,14 @@ export type SelectionInputItem = {
   selected: boolean;
 };
 
-export interface SelectionInputComputedProps extends BaseClassData {
+export interface SelectionInput extends BaseClassData {
   title?: string;
   fieldName?: string;
-  onChangeAction?: ActionComputedProps;
+  onChangeAction?: Action;
   items: SelectionInputItem[];
 }
 
-export class SelectionInput extends Widget<SelectionInputComputedProps> {
+export class SelectionInput extends Widget<SelectionInput> {
   constructor() {
     super();
 

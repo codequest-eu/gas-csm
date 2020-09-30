@@ -1,14 +1,13 @@
 import { BaseClass, BaseClassData } from "../../base/BaseClass";
 import { UniversalActionResponse } from "./UniversalActionResponse";
-import { Card, CardComputedProps } from "./Card";
+import { Card } from "./Card";
 
-export interface UniversalActionResponseBuilderComputedProps
-  extends BaseClassData {
-  cards: CardComputedProps[];
+export interface UniversalActionResponseBuilder extends BaseClassData {
+  cards: Card[];
 }
 
 export class UniversalActionResponseBuilder extends BaseClass<
-  UniversalActionResponseBuilderComputedProps
+  UniversalActionResponseBuilder
 > {
   build() {
     return new UniversalActionResponse(this.getData());

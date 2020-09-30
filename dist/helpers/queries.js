@@ -3,9 +3,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.findByType = exports.findByText = void 0;
 function findByText(comp, found = []) {
     return function (text, predicate = (v, t) => v === t) {
+        // @ts-ignore
         return [...(comp.widgets || []), ...(comp.sections || [])].reduce((prev, curr) => {
-            const textsFound = Object.entries(curr).filter(([, value]) => typeof value === "string" && predicate(value, text));
-            const result = textsFound.length ? [...prev, curr] : prev;
+            const textFound = Object.entries(curr).some(([, value]) => typeof value === "string" && predicate(value, text));
+            const result = textFound ? [...prev, curr] : prev;
             return curr.widgets
                 ? findByText(curr, result)(text, predicate)
                 : result;

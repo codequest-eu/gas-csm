@@ -1,12 +1,12 @@
 import { BaseClass, BaseClassData } from "../../base/BaseClass";
-import { OpenLinkComputedProps } from "./OpenLink";
-import { NavigationComputedProps } from "./Navigation";
-import { NotificationComputedProps } from "./Notification";
+import { OpenLink } from "./OpenLink";
+import { Navigation } from "./Navigation";
+import { Notification } from "./Notification";
 import { ActionResponse } from "./ActionResponse";
-export interface ActionResponseBuilderComputedProps extends BaseClassData {
-    navigation?: NavigationComputedProps;
-    notification?: NotificationComputedProps;
-    openLink?: OpenLinkComputedProps;
+export interface ActionResponseBuilder extends BaseClassData {
+    navigation?: Navigation;
+    notification?: Notification;
+    openLink?: OpenLink;
     stateChanged?: boolean;
 }
 export declare class ActionResponseBuilder extends BaseClass {

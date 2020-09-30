@@ -1,10 +1,10 @@
 import { BaseClass, BaseClassData } from "../../base/BaseClass";
 
-export interface SuggestionsComputedProps extends BaseClassData {
+export interface Suggestions extends BaseClassData {
   suggestions: string[];
 }
 
-export class Suggestions extends BaseClass<SuggestionsComputedProps> {
+export class Suggestions extends BaseClass<Suggestions> {
   addSuggestions(suggestions: string[]) {
     suggestions.forEach(s => {
       this.addSuggestion(s);

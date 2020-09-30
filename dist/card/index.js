@@ -10,6 +10,7 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Widget = void 0;
 __exportStar(require("./CardService"), exports);
 __exportStar(require("./classes/Action"), exports);
 __exportStar(require("./classes/CardSection"), exports);
@@ -40,7 +41,8 @@ __exportStar(require("./classes/Notification"), exports);
 __exportStar(require("./classes/UpdateDraftBodyAction"), exports);
 __exportStar(require("./classes/CardBuilder"), exports);
 __exportStar(require("./classes/OpenLink"), exports);
-__exportStar(require("./classes/Widget"), exports);
+var Widget_1 = require("./classes/Widget");
+Object.defineProperty(exports, "Widget", { enumerable: true, get: function () { return Widget_1.Widget; } });
 __exportStar(require("./classes/CardHeader"), exports);
 __exportStar(require("./classes/SelectionInput"), exports);
 __exportStar(require("./enums/ComposeEmailType"), exports);

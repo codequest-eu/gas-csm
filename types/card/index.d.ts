@@ -28,7 +28,7 @@ export * from "./classes/Notification";
 export * from "./classes/UpdateDraftBodyAction";
 export * from "./classes/CardBuilder";
 export * from "./classes/OpenLink";
-export * from "./classes/Widget";
+export { Widget } from "./classes/Widget";
 export * from "./classes/CardHeader";
 export * from "./classes/SelectionInput";
 export * from "./enums/ComposeEmailType";

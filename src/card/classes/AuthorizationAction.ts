@@ -1,9 +1,7 @@
 import { BaseClass, BaseClassData } from "../../base/BaseClass";
 
-export interface AuthorizationActionComputedProps extends BaseClassData {
+export interface AuthorizationAction extends BaseClassData {
   authorizationUrl: string;
 }
 
-export class AuthorizationAction extends BaseClass<
-  AuthorizationActionComputedProps
-> {}
+export class AuthorizationAction extends BaseClass<AuthorizationAction> {}

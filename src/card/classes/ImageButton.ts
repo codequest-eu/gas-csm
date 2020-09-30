@@ -1,13 +1,18 @@
 import { Icon } from "../enums/Icon";
-import { ActionComputedProps } from "./Action";
-import { ButtonComputedProps } from "./Button";
+import { Action } from "./Action";
 import { Widget } from "./Widget";
+import { BaseClassData } from "../../base/BaseClass";
+import { AuthorizationAction, OpenLink } from "..";
 
-export interface ImageButtonComputedProps extends ButtonComputedProps {
+export interface ImageButton extends BaseClassData {
   alt?: string;
   icon?: Icon;
   iconUrl?: string;
-  onClickAction: ActionComputedProps;
+  authorizationAction?: AuthorizationAction;
+  composeAction?: Action;
+  onClickAction?: Action;
+  onClickOpenLinkAction?: Action;
+  openLink?: OpenLink;
 }
 
-export class ImageButton extends Widget<ImageButtonComputedProps> {}
+export class ImageButton extends Widget<ImageButton> {}

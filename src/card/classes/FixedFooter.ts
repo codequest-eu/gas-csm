@@ -1,10 +1,10 @@
 import { BaseClass } from "../../base/BaseClass";
 import { BaseClassData } from "../../base/BaseClass";
-import { TextButtonComputedProps } from "./TextButton";
+import { TextButton } from "./TextButton";
 
-export interface FixedFooterComputedProps extends BaseClassData {
-  primaryButton?: TextButtonComputedProps;
-  secondaryButton?: TextButtonComputedProps;
+export interface FixedFooter extends BaseClassData {
+  primaryButton?: TextButton;
+  secondaryButton?: TextButton;
 }
 
-export class FixedFooter extends BaseClass<FixedFooterComputedProps> {}
+export class FixedFooter extends BaseClass<FixedFooter> {}

@@ -1,18 +1,18 @@
 import { BaseClass, BaseClassData } from "../../base/BaseClass";
-import { CardHeader, CardHeaderComputedProps } from "./CardHeader";
-import { CardSection, CardSectionComputedProps } from "./CardSection";
-import { CardAction, CardActionComputedProps } from "./CardAction";
+import { CardHeader } from "./CardHeader";
+import { CardSection } from "./CardSection";
+import { CardAction } from "./CardAction";
 import { FixedFooter } from "./FixedFooter";
 
-export interface CardComputedProps extends BaseClassData {
-  header?: CardHeaderComputedProps;
+export interface Card extends BaseClassData {
+  header?: CardHeader;
   name?: string;
-  sections: CardSectionComputedProps[];
-  cardActions: CardActionComputedProps[];
+  sections: CardSection[];
+  cardActions: CardAction[];
   fixedFooter?: FixedFooter;
 }
 
-export class Card extends BaseClass<CardComputedProps> {
+export class Card extends BaseClass<Card> {
   setHeader(header: CardHeader) {
     this._data.header = header.getData();
   }

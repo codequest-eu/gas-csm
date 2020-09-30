@@ -1,7 +1,7 @@
 import { BaseClass, BaseClassData } from "../../base/BaseClass";
 
-export interface NotificationComputedProps extends BaseClassData {
+export interface Notification extends BaseClassData {
   text: string;
 }
 
-export class Notification extends BaseClass<NotificationComputedProps> {}
+export class Notification extends BaseClass<Notification> {}

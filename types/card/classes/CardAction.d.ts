@@ -1,14 +1,14 @@
 import { BaseClass, BaseClassData } from "../../base/BaseClass";
-import { AuthorizationActionComputedProps } from "./AuthorizationAction";
-import { ActionComputedProps } from "./Action";
-import { OpenLinkComputedProps } from "./OpenLink";
-export interface CardActionComputedProps extends BaseClassData {
-    authorizationAction?: AuthorizationActionComputedProps;
-    composeAction?: ActionComputedProps;
-    onClickAction?: ActionComputedProps;
-    onClickOpenLinkAction?: ActionComputedProps;
-    openLink?: OpenLinkComputedProps;
+import { AuthorizationAction } from "./AuthorizationAction";
+import { Action } from "./Action";
+import { OpenLink } from "./OpenLink";
+export interface CardAction extends BaseClassData {
+    authorizationAction?: AuthorizationAction;
+    composeAction?: Action;
+    onClickAction?: Action;
+    onClickOpenLinkAction?: Action;
+    openLink?: OpenLink;
     text?: string;
 }
-export declare class CardAction extends BaseClass<CardActionComputedProps> {
+export declare class CardAction extends BaseClass<CardAction> {
 }

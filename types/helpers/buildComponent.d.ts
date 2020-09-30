@@ -1,33 +1,58 @@
 import { BaseClass, BaseClassData } from "../base/BaseClass";
-import { CardSectionComputedProps, WidgetComputedProps, CardSection } from "../card/classes/CardSection";
-import { Card, CardComputedProps } from "../card/classes/Card";
-declare type CardOrSectionComputedProps = {
-    widgets?: WidgetComputedProps[];
-    sections?: CardSectionComputedProps[];
+import { CardSection, Widget, CardSection } from "../card/classes/CardSection";
+import { Card } from "../card/classes/Card";
+declare type CardOrSection = {
+  widgets?: Widget[];
+  sections?: CardSection[];
 };
-export declare function buildComponent<C extends Card | CardSection>(component: C): {
-    findByText: <T extends BaseClassData>(text: string, predicate?: (value: string, text: string) => boolean) => T[];
-    findByType: <Target extends new () => BaseClass<BaseClassData>>(ComponentClass: Target) => Target extends new () => BaseClass<infer P> ? P[] : never[];
-    sections: {
-        findByType: <Target extends new () => BaseClass<BaseClassData>>(ComponentClass: Target) => Target extends new () => BaseClass<infer P> ? P[] : never[];
-        widgets: WidgetComputedProps[];
-        collapsible?: boolean | undefined;
-        header?: string | undefined;
-        numUncollapsibleWidgets?: number | undefined;
+export declare function buildComponent<C extends Card | CardSection>(
+  component: C
+): {
+  findByText: <T extends BaseClassData>(
+    text: string,
+    predicate?: (value: string, text: string) => boolean
+  ) => T[];
+  findByType: <Target extends new () => BaseClass<BaseClassData>>(
+    ComponentClass: Target
+  ) => Target extends new () => BaseClass<infer P> ? P[] : never[];
+  sections: {
+    findByType: <Target extends new () => BaseClass<BaseClassData>>(
+      ComponentClass: Target
+    ) => Target extends new () => BaseClass<infer P> ? P[] : never[];
+    widgets: Widget[];
+    collapsible?: boolean | undefined;
+    header?: string | undefined;
+    numUncollapsibleWidgets?: number | undefined;
+    type: string;
+  }[];
+  widgets: Widget[];
+  card:
+    | (CardSection & {
         type: string;
-    }[];
-    widgets: WidgetComputedProps[];
-    card: (CardSectionComputedProps & {
+      })
+    | (Card & {
         type: string;
-    }) | (CardComputedProps & {
+      })
+    | undefined;
+  mockData:
+    | (CardSection & {
         type: string;
-    }) | undefined;
-    mockData: (CardSectionComputedProps & {
+      })
+    | (Card & {
         type: string;
-    }) | (CardComputedProps & {
-        type: string;
-    });
+      });
 };
-export declare function findByType<C extends BaseClassData>(data: CardOrSectionComputedProps, found?: BaseClassData[]): <Target extends new () => BaseClass>(ComponentClass: Target) => Target extends new () => BaseClass<infer P> ? P[] : never[];
-export declare function findByText(comp: CardOrSectionComputedProps, found?: BaseClassData[]): <T extends BaseClassData>(text: string, predicate?: (value: string, text: string) => boolean) => T[];
+export declare function findByType<C extends BaseClassData>(
+  data: CardOrSection,
+  found?: BaseClassData[]
+): <Target extends new () => BaseClass>(
+  ComponentClass: Target
+) => Target extends new () => BaseClass<infer P> ? P[] : never[];
+export declare function findByText(
+  comp: CardOrSection,
+  found?: BaseClassData[]
+): <T extends BaseClassData>(
+  text: string,
+  predicate?: (value: string, text: string) => boolean
+) => T[];
 export {};

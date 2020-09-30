@@ -1,10 +1,10 @@
-import { CardSectionComputedProps } from "../card/classes/CardSection";
+import { CardSection } from "../card/classes/CardSection";
 import { findByText, findByType } from "./queries";
-import { CardComputedProps } from "../card";
+import { Card } from "../card";
 
 export function buildSection(
   section: GoogleAppsScript.Card_Service.CardSection & {
-    getData?: () => CardSectionComputedProps;
+    getData?: () => CardSection;
   }
 ) {
   if (!section.getData) {
@@ -20,7 +20,7 @@ export function buildSection(
 
 export function buildCard(
   card: GoogleAppsScript.Card_Service.Card & {
-    getData?: () => CardComputedProps;
+    getData?: () => Card;
   }
 ) {
   if (!card.getData) {
@@ -49,7 +49,7 @@ export function buildCard(
   };
 }
 
-function buildSectionResult(mockData: CardSectionComputedProps) {
+function buildSectionResult(mockData: CardSection) {
   const { widgets } = mockData;
 
   if (!widgets || widgets.length === 0) {

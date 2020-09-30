@@ -1,10 +1,10 @@
-import { ActionComputedProps } from "./Action";
+import { Action } from "./Action";
 import { BaseClassData } from "../../base/BaseClass";
 import { Widget } from "./Widget";
-export interface ImageComputedProps extends BaseClassData {
+export interface Image extends BaseClassData {
     imageUrl: string;
     altText?: string;
-    onClickAction?: ActionComputedProps;
+    onClickAction?: Action;
 }
-export declare class Image extends Widget<ImageComputedProps> {
+export declare class Image extends Widget<Image> {
 }

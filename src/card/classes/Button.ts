@@ -1,15 +1,15 @@
 import { BaseClass } from "../../base/BaseClass";
 import { BaseClassData } from "../../base/BaseClass";
-import { AuthorizationActionComputedProps } from "./AuthorizationAction";
-import { ActionComputedProps } from "./Action";
-import { OpenLinkComputedProps } from "./OpenLink";
+import { AuthorizationAction } from "./AuthorizationAction";
+import { Action } from "./Action";
+import { OpenLink } from "./OpenLink";
 
-export interface ButtonComputedProps extends BaseClassData {
-  authorizationAction?: AuthorizationActionComputedProps;
-  composeAction?: ActionComputedProps;
-  onClickAction?: ActionComputedProps;
-  onClickOpenLinkAction?: ActionComputedProps;
-  openLink?: OpenLinkComputedProps;
+export interface Button extends BaseClassData {
+  authorizationAction?: AuthorizationAction;
+  composeAction?: Action;
+  onClickAction?: Action;
+  onClickOpenLinkAction?: Action;
+  openLink?: OpenLink;
 }
 
-export class Button extends BaseClass<ButtonComputedProps> {}
+export class Button extends BaseClass<Button> {}
