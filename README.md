@@ -107,7 +107,7 @@ describe("createHomepageWelcomeSection", () => {
 ```
 
 ## Queries
-Once you've built a card or section mock, the returned object provices helpers for finding elements within the mocked object.
+Once you've built a card or section mock, the returned object provices helpers for finding elements within the mocked object. You can find these in results of `buildCard` and `buildSection` or import them manually from the `Spec` object. You will find them under `findByTextInCard`, `findByTextInSection`, `findByType` and `isTextInWidget`.
 
 ### `findByText(comp: Card | CardSection)(text: string, predicate?: (value: string, text: string) => boolean)`
 Returns array of mocks in which at least one property's value was of type `string` and matched the passed `predicate`. Default `predicate` looks for exact matches. Customise this to your needs, if for example you are looking for props that include the text or were transformed in some way.
