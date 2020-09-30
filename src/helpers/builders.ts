@@ -1,6 +1,6 @@
-import { CardSection } from "../card/classes/CardSection";
+import { CardSection } from "../mocks/classes/CardSection";
 import { findByText, findByType } from "./queries";
-import { Card } from "../card";
+import { Card } from "../mocks";
 
 export function buildSection(
   section: GoogleAppsScript.Card_Service.CardSection & {

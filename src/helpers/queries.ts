@@ -1,5 +1,5 @@
 import { BaseClassData, BaseClass } from "../base/BaseClass";
-import { CardSection, Widget, Card } from "../card";
+import { CardSection, Card } from "../mocks";
 
 export function findByText(
   comp: Card | CardSection,
