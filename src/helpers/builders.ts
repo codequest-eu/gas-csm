@@ -32,14 +32,14 @@ export function buildCard(
 
   const { sections } = mockData;
 
-  if (!sections || sections.length === 0) {
+  if (sections && sections.length === 0) {
     throw new Error("Every card has to contain at least one section.");
   }
 
   return {
     findByText: findByTextInCard(mockData),
     findByType: findByType(mockData),
-    sections: mockData.sections.map(buildSectionResult),
+    sections: (mockData.sections || []).map(buildSectionResult),
     fixedFooter: mockData.fixedFooter,
     header: mockData.header,
     name: mockData.name,

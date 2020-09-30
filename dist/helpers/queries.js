@@ -51,7 +51,7 @@ function deepExtractValues(data) {
     for (const prop in data) {
         const value = data[prop];
         if (typeof value === "object") {
-            result.push(deepExtractValues(value));
+            result.push(...deepExtractValues(value));
         }
         else {
             result.push(value);
