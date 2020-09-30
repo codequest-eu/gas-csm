@@ -77,7 +77,7 @@ function deepExtractValues(data: BaseClassData): any[] {
   for (const prop in data) {
     const value = data[prop as keyof typeof data];
     if (typeof value === "object") {
-      result.push(deepExtractValues(value));
+      result.push(...deepExtractValues(value));
     } else {
       result.push(value);
     }
