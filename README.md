@@ -137,3 +137,9 @@ submitButton.onClickAction!.functionName.should.equal(
     "someFn"
 );
 ```
+
+## Deploying
+
+1. `npm run tsc` - compile TS -> JS
+2. Commit changes and push a new branch.
+3. Code review -> merge to `master` branch.
