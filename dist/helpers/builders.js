@@ -20,16 +20,14 @@ function buildCard(card) {
         throw new Error("Every card has to contain at least one section.");
     }
     return {
-        findByText: queries_1.findByText(mockData),
+        findByText: queries_1.findByTextInCard(mockData),
         findByType: queries_1.findByType(mockData),
         sections: mockData.sections.map(buildSectionResult),
         fixedFooter: mockData.fixedFooter,
         header: mockData.header,
         name: mockData.name,
         cardActions: mockData.cardActions,
-        debug: () => {
-            console.log(JSON.stringify(mockData, null, 2));
-        },
+        debug: debug(mockData),
     };
 }
 exports.buildCard = buildCard;
@@ -39,11 +37,18 @@ function buildSectionResult(mockData) {
         throw new Error("Every section has to contain at least one widget.");
     }
     return {
-        findByText: queries_1.findByText(mockData),
+        findByText: queries_1.findByTextInSection(mockData),
         findByType: queries_1.findByType(mockData),
-        widgets: mockData.widgets || [],
-        debug: () => {
-            console.log(JSON.stringify(mockData, null, 2));
-        },
+        widgets: (mockData.widgets || []).map(w => ({
+            ...w,
+            debug: debug(w),
+        })),
+        debug: debug(mockData),
+    };
+}
+function debug(mockData) {
+    return function () {
+        console.log(`Debug ${mockData.type}`);
+        console.log(JSON.stringify(mockData, null, 2));
     };
 }

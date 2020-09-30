@@ -1,6 +1,7 @@
 import { CardSection } from "../mocks/classes/CardSection";
-import { findByText, findByType } from "./queries";
+import { findByTextInCard, findByTextInSection, findByType } from "./queries";
 import { Card } from "../mocks";
+import { BaseClassData } from "../base/BaseClass";
 
 export function buildSection(
   section: GoogleAppsScript.Card_Service.CardSection & {
@@ -36,16 +37,14 @@ export function buildCard(
   }
 
   return {
-    findByText: findByText(mockData),
+    findByText: findByTextInCard(mockData),
     findByType: findByType(mockData),
     sections: mockData.sections.map(buildSectionResult),
     fixedFooter: mockData.fixedFooter,
     header: mockData.header,
     name: mockData.name,
     cardActions: mockData.cardActions,
-    debug: () => {
-      console.log(JSON.stringify(mockData, null, 2));
-    },
+    debug: debug(mockData),
   };
 }
 
@@ -57,11 +56,19 @@ function buildSectionResult(mockData: CardSection) {
   }
 
   return {
-    findByText: findByText(mockData),
+    findByText: findByTextInSection(mockData),
     findByType: findByType(mockData),
-    widgets: mockData.widgets || [],
-    debug: () => {
-      console.log(JSON.stringify(mockData, null, 2));
-    },
+    widgets: (mockData.widgets || []).map(w => ({
+      ...w,
+      debug: debug(w),
+    })),
+    debug: debug(mockData),
+  };
+}
+
+function debug(mockData: BaseClassData) {
+  return function () {
+    console.log(`Debug ${mockData.type}`);
+    console.log(JSON.stringify(mockData, null, 2));
   };
 }

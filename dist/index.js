@@ -27,4 +27,4 @@ Object.defineProperty(exports, "BaseClass", { enumerable: true, get: function ()
 const Spec = __importStar(require("./helpers"));
 exports.Spec = Spec;
 // @ts-ignore
-Object.assign(global, Card, Spec);
+Object.assign(global, Mocks, Spec);

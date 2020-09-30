@@ -1,19 +1,39 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.findByType = exports.findByText = void 0;
-function findByText(comp, found = []) {
+exports.findByType = exports.isTextInWidget = exports.findByTextInSection = exports.findByTextInCard = void 0;
+function findByTextInCard(card) {
     return function (text, predicate = (v, t) => v === t) {
-        // @ts-ignore
-        return [...(comp.widgets || []), ...(comp.sections || [])].reduce((prev, curr) => {
-            const textFound = Object.entries(curr).some(([, value]) => typeof value === "string" && predicate(value, text));
-            const result = textFound ? [...prev, curr] : prev;
-            return curr.widgets
-                ? findByText(curr, result)(text, predicate)
-                : result;
-        }, found);
+        const foundInCard = [
+            card.fixedFooter,
+            ...(card.cardActions || []),
+            card.header,
+        ].filter(w => isTextInWidget(w)(text, predicate));
+        const foundInSections = card.sections
+            .map(s => findByTextInSection(s)(text, predicate))
+            .flat();
+        return [...foundInCard, ...foundInSections].filter(Boolean);
     };
 }
-exports.findByText = findByText;
+exports.findByTextInCard = findByTextInCard;
+function findByTextInSection(section) {
+    return function (text, predicate = (v, t) => v === t) {
+        const inWidgets = section.widgets.reduce((prev, curr) => {
+            const textFound = isTextInWidget(curr)(text, predicate);
+            return textFound ? [...prev, curr] : prev;
+        }, []);
+        return inWidgets;
+    };
+}
+exports.findByTextInSection = findByTextInSection;
+function isTextInWidget(widget) {
+    return function (text, predicate = (v, t) => v === t) {
+        if (!widget) {
+            return false;
+        }
+        return deepExtractValues(widget).some(value => typeof value === "string" && predicate(value, text));
+    };
+}
+exports.isTextInWidget = isTextInWidget;
 function findByType(data, found = []) {
     return function (ComponentClass) {
         // @ts-ignore
@@ -26,3 +46,16 @@ function findByType(data, found = []) {
     };
 }
 exports.findByType = findByType;
+function deepExtractValues(data) {
+    const result = [];
+    for (const prop in data) {
+        const value = data[prop];
+        if (typeof value === "object") {
+            result.push(deepExtractValues(value));
+        }
+        else {
+            result.push(value);
+        }
+    }
+    return result;
+}
