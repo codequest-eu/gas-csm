@@ -3,7 +3,7 @@ This library provides mocks for components created for the G Suite Addon platfor
 
 The entire lib is written in TypeScript.
 
-🛠 Be aware that this project is in state of Work in Progress and requires double check before using in production.
+🛠 Be aware that this project is in state of Work in Progress.
 
 ## Installation
 Add the following line to your `package.json` file:
