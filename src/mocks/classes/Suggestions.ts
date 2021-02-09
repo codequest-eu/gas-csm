@@ -5,6 +5,11 @@ export interface Suggestions extends BaseClassData {
 }
 
 export class Suggestions extends BaseClass<Suggestions> {
+  constructor() {
+    super();
+    this._data.suggestions = [];
+  }
+
   addSuggestions(suggestions: string[]) {
     suggestions.forEach(s => {
       this.addSuggestion(s);
